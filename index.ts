@@ -35,6 +35,33 @@ const BASE_URL = "https://{region}-aiplatform.googleapis.com";
 
 const MODELS: ProviderModelConfig[] = [
 	{
+		id: "claude-opus-4-7",
+		name: "Claude Opus 4.7 (Vertex AI)",
+		reasoning: true,
+		input: ["text", "image"],
+		cost: { input: 15, output: 75, cacheRead: 0.5, cacheWrite: 6.25 },
+		contextWindow: 1000000,
+		maxTokens: 128000,
+	},
+	{
+		id: "claude-sonnet-4-6",
+		name: "Claude Sonnet 4.6 (Vertex AI)",
+		reasoning: true,
+		input: ["text", "image"],
+		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
+		contextWindow: 1000000,
+		maxTokens: 64000,
+	},
+	{
+		id: "claude-opus-4-6",
+		name: "Claude Opus 4.6 (Vertex AI)",
+		reasoning: true,
+		input: ["text", "image"],
+		cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
+		contextWindow: 1000000,
+		maxTokens: 128000,
+	},
+	{
 		id: "claude-sonnet-4-5@20250929",
 		name: "Claude Sonnet 4.5 (Vertex AI)",
 		reasoning: true,
@@ -53,13 +80,13 @@ const MODELS: ProviderModelConfig[] = [
 		maxTokens: 32000,
 	},
 	{
-		id: "claude-opus-4-6@default",
-		name: "Claude Opus 4.6 (Vertex AI)",
+		id: "claude-opus-4-1@20250805",
+		name: "Claude Opus 4.1 (Vertex AI)",
 		reasoning: true,
 		input: ["text", "image"],
-		cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
+		cost: { input: 15, output: 75, cacheRead: 1.5, cacheWrite: 18.75 },
 		contextWindow: 200000,
-		maxTokens: 128000,
+		maxTokens: 32000,
 	},
 	{
 		id: "claude-haiku-4-5@20251001",
@@ -69,51 +96,6 @@ const MODELS: ProviderModelConfig[] = [
 		cost: { input: 1, output: 5, cacheRead: 0.1, cacheWrite: 1.25 },
 		contextWindow: 200000,
 		maxTokens: 8192,
-	},
-	{
-		id: "claude-sonnet-4-20250514",
-		name: "Claude Sonnet 4 (Vertex AI)",
-		reasoning: true,
-		input: ["text", "image"],
-		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
-		contextWindow: 200000,
-		maxTokens: 64000,
-	},
-	{
-		id: "claude-3-5-sonnet-v2@20241022",
-		name: "Claude 3.5 Sonnet v2 (Vertex AI)",
-		reasoning: false,
-		input: ["text", "image"],
-		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
-		contextWindow: 200000,
-		maxTokens: 8192,
-	},
-	{
-		id: "claude-3-5-haiku@20241022",
-		name: "Claude 3.5 Haiku (Vertex AI)",
-		reasoning: false,
-		input: ["text", "image"],
-		cost: { input: 1, output: 5, cacheRead: 0.1, cacheWrite: 1.25 },
-		contextWindow: 200000,
-		maxTokens: 8192,
-	},
-	{
-		id: "claude-3-opus@20240229",
-		name: "Claude 3 Opus (Vertex AI)",
-		reasoning: false,
-		input: ["text", "image"],
-		cost: { input: 15, output: 75, cacheRead: 1.5, cacheWrite: 18.75 },
-		contextWindow: 200000,
-		maxTokens: 4096,
-	},
-	{
-		id: "claude-3-haiku@20240307",
-		name: "Claude 3 Haiku (Vertex AI)",
-		reasoning: false,
-		input: ["text", "image"],
-		cost: { input: 0.25, output: 1.25, cacheRead: 0.025, cacheWrite: 0.3125 },
-		contextWindow: 200000,
-		maxTokens: 4096,
 	},
 ];
 
@@ -158,7 +140,8 @@ function mergeHeaders(...sources: Array<Record<string, string> | undefined>): Re
 }
 
 function supportsAdaptiveThinking(modelId: string): boolean {
-	return modelId.includes("opus-4-6") || modelId.includes("opus-4.6");
+	return modelId.includes("opus-4-6") || modelId.includes("opus-4-7")
+		|| modelId.includes("sonnet-4-6");
 }
 
 function mapThinkingLevelToEffort(level: SimpleStreamOptions["reasoning"]): AnthropicVertexEffort {
