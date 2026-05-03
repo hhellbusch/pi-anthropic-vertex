@@ -61,42 +61,6 @@ const MODELS: ProviderModelConfig[] = [
 		contextWindow: 1000000,
 		maxTokens: 128000,
 	},
-	{
-		id: "claude-sonnet-4-5@20250929",
-		name: "Claude Sonnet 4.5 (Vertex AI)",
-		reasoning: true,
-		input: ["text", "image"],
-		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
-		contextWindow: 200000,
-		maxTokens: 64000,
-	},
-	{
-		id: "claude-opus-4-5@20251101",
-		name: "Claude Opus 4.5 (Vertex AI)",
-		reasoning: true,
-		input: ["text", "image"],
-		cost: { input: 15, output: 75, cacheRead: 0.5, cacheWrite: 6.25 },
-		contextWindow: 200000,
-		maxTokens: 32000,
-	},
-	{
-		id: "claude-opus-4-1@20250805",
-		name: "Claude Opus 4.1 (Vertex AI)",
-		reasoning: true,
-		input: ["text", "image"],
-		cost: { input: 15, output: 75, cacheRead: 1.5, cacheWrite: 18.75 },
-		contextWindow: 200000,
-		maxTokens: 32000,
-	},
-	{
-		id: "claude-haiku-4-5@20251001",
-		name: "Claude Haiku 4.5 (Vertex AI)",
-		reasoning: false,
-		input: ["text", "image"],
-		cost: { input: 1, output: 5, cacheRead: 0.1, cacheWrite: 1.25 },
-		contextWindow: 200000,
-		maxTokens: 8192,
-	},
 ];
 
 type AnthropicVertexEffort = "low" | "medium" | "high" | "max";
