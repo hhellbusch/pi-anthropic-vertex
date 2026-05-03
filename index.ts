@@ -35,8 +35,17 @@ const BASE_URL = "https://{region}-aiplatform.googleapis.com";
 
 const MODELS: ProviderModelConfig[] = [
 	{
+		id: "claude-sonnet-4-7",
+		name: "Claude Sonnet 4.7 [reasoning]",
+		reasoning: true,
+		input: ["text", "image"],
+		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
+		contextWindow: 200000,
+		maxTokens: 64000,
+	},
+	{
 		id: "claude-opus-4-7",
-		name: "Claude Opus 4.7 (Vertex AI)",
+		name: "Claude Opus 4.7 [reasoning]",
 		reasoning: true,
 		input: ["text", "image"],
 		cost: { input: 15, output: 75, cacheRead: 0.5, cacheWrite: 6.25 },
@@ -45,7 +54,7 @@ const MODELS: ProviderModelConfig[] = [
 	},
 	{
 		id: "claude-sonnet-4-6",
-		name: "Claude Sonnet 4.6 (Vertex AI)",
+		name: "Claude Sonnet 4.6 [reasoning]",
 		reasoning: true,
 		input: ["text", "image"],
 		cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
@@ -54,12 +63,21 @@ const MODELS: ProviderModelConfig[] = [
 	},
 	{
 		id: "claude-opus-4-6",
-		name: "Claude Opus 4.6 (Vertex AI)",
+		name: "Claude Opus 4.6 [reasoning]",
 		reasoning: true,
 		input: ["text", "image"],
 		cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
 		contextWindow: 1000000,
 		maxTokens: 128000,
+	},
+	{
+		id: "claude-haiku-4-6",
+		name: "Claude Haiku 4.6",
+		reasoning: false,
+		input: ["text", "image"],
+		cost: { input: 0.80, output: 4, cacheRead: 0.08, cacheWrite: 1 },
+		contextWindow: 200000,
+		maxTokens: 8192,
 	},
 ];
 
@@ -105,7 +123,7 @@ function mergeHeaders(...sources: Array<Record<string, string> | undefined>): Re
 
 function supportsAdaptiveThinking(modelId: string): boolean {
 	return modelId.includes("opus-4-6") || modelId.includes("opus-4-7")
-		|| modelId.includes("sonnet-4-6");
+		|| modelId.includes("sonnet-4-6") || modelId.includes("sonnet-4-7");
 }
 
 function mapThinkingLevelToEffort(level: SimpleStreamOptions["reasoning"]): AnthropicVertexEffort {
