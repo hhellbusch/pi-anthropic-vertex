@@ -27,8 +27,8 @@ import {
 	type ToolCall,
 	type ToolResultMessage,
 	createAssistantMessageEventStream,
-} from "@mariozechner/pi-ai";
-import type { ExtensionAPI, ProviderModelConfig } from "@mariozechner/pi-coding-agent";
+} from "@earendil-works/pi-ai";
+import type { ExtensionAPI, ProviderModelConfig } from "@earendil-works/pi-coding-agent";
 
 const DEFAULT_REGION = "us-east5";
 const BASE_URL = "https://{region}-aiplatform.googleapis.com";
@@ -513,7 +513,7 @@ const streamAnthropicVertexStandalone: StreamFunction<Api, AnthropicVertexOption
 		try {
 			const client = createClient(model, options);
 			const params = buildParams(model, context, options);
-			options?.onPayload?.(params);
+			options?.onPayload?.(params, model);
 			const events = client.messages.stream({ ...params, stream: true }, { signal: options?.signal });
 
 			stream.push({ type: "start", partial: output });
