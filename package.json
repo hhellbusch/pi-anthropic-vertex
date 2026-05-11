@@ -16,16 +16,16 @@
     ]
   },
   "peerDependencies": {
-    "@mariozechner/pi-ai": "*",
-    "@mariozechner/pi-coding-agent": "*"
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.73.0",
     "@anthropic-ai/vertex-sdk": "^0.14.0"
   },
   "devDependencies": {
-    "@mariozechner/pi-ai": "^0.54.2",
-    "@mariozechner/pi-coding-agent": "^0.54.2",
+    "@earendil-works/pi-ai": "^0.74.0",
+    "@earendil-works/pi-coding-agent": "^0.74.0",
     "@types/node": "^22.10.5",
     "typescript": "^5.9.3"
   },
